@@ -1,0 +1,7 @@
+[package]
+name = "b64rs"
+version = "0.1.0"
+authors = ["jaredfowler <jfowler@imbellus.com>"]
+edition = "2018"
+
+[dependencies]
