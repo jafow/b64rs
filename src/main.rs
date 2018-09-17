@@ -4,7 +4,7 @@ fn main () {
     let man: &str = "Man";
     let output = b64::b64::encode(man);
 
-    assert_eq!(output, "Hey Man");
+    assert_eq!(output, "TWFu");
 
     #[cfg(test)]
     mod tests {
