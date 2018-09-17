@@ -18,11 +18,13 @@ pub mod b64 {
         le6: 0x3f
     };
 
-    const TABLE: [&str; 64] = ["A", "B", "C", "D", "E", "F", "G", "H", "I",
+    const PADDING_BITS: u8 = 65;
+
+    const TABLE: [&str; 65] = ["A", "B", "C", "D", "E", "F", "G", "H", "I",
     "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X",
     "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i",
     "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x",
-    "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "/"];
+    "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "/", "="];
 
     pub fn encode (s: &str) -> String {
         let mut encoded: Vec<u8> = Vec::new();
@@ -40,7 +42,10 @@ pub mod b64 {
         }
 
         for val in (0..len - 1).step_by(3) {
+            let mut chunk = [&input_str[val as usize], &input_str[val + 1 as usize], &input_str[val + 2 as usize]];
         }
-        "Hey Man".to_string()
+
+        // transform each 6-bit piece by lookup to TABLE and join
+        encoded.iter().map(|x| TABLE[*x as usize]).collect()
     }
 }
