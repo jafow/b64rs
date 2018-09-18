@@ -9,6 +9,11 @@ pub mod b64 {
         le6: u8
     }
 
+    enum Enc {
+        Enc::Hex,
+        Enc::UTF8
+    }
+
     const BITMASK: BitMask = BitMask {
         be2: 0xc0,
         be4: 0xf0,
@@ -26,7 +31,7 @@ pub mod b64 {
     "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x",
     "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "/", "="];
 
-    pub fn encode (s: &str) -> String {
+    pub fn encode (s: &str, enc: Enc) -> String {
         let mut encoded: Vec<u8> = Vec::new();
         let mut out_str = String::new();
 
