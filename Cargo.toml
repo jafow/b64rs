@@ -2,4 +2,3 @@
 name = "b64rs"
 version = "0.1.0"
 authors = ["jared fowler <jared.a.fowler@gmail.com>"]
-edition = "2018"

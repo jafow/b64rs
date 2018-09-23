@@ -1,10 +1,15 @@
 mod b64;
 
 fn main () {
-    let man: &str = "Man";
+    let man: &str = "M";
     let output = b64::b64::encode(man);
 
-    assert_eq!(output, "TWFu");
+    assert_eq!(output, "TQ==");
+
+    let whoa: &str = "hello world";
+    let out_whao = b64::b64::encode(whoa);
+
+    assert_eq!(out_whao, "aGVsbG8gd29ybGQ=");
 
     #[cfg(test)]
     mod tests {
