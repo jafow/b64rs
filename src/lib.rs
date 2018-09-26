@@ -1,3 +1,6 @@
+mod table;
+pub use table::{standard};
+
 mod encode;
 pub use encode::{encode};
 

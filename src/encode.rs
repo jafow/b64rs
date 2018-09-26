@@ -1,3 +1,6 @@
+use std::string::FromUtf8Error;
+use table;
+
 #[derive(Debug)]
 struct BitMask {
     be2: u8,
@@ -20,13 +23,7 @@ const BITMASK: BitMask = BitMask {
 const SENT: u8 = 255;
 const PAD: u8 = 64;
 
-const TABLE: [&str; 65] = ["A", "B", "C", "D", "E", "F", "G", "H", "I",
-"J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X",
-"Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i",
-"j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x",
-"y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "/", "="];
-
-pub fn encode (s: &str) -> String {
+pub fn encode (s: &[u8]) -> Result<String, FromUtf8Error> {
     let len = s.len();
     let mut encoded: Vec<u8> = Vec::new();
     let mut input_str: Vec<u8> = Vec::from(s);
@@ -68,6 +65,7 @@ pub fn encode (s: &str) -> String {
             }
         }
     }
-
-    encoded.iter().map(|x| TABLE[*x as usize]).collect()
+    String::from_utf8(encoded.iter()
+                      .map(|x| table::standard()[*x as usize])
+                      .collect())
 }
