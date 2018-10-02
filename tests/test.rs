@@ -13,5 +13,5 @@ fn test_encode_multi_word() {
     let whoa: &[u8] = b"hello world";
     let out_whao = b64rs::encode(whoa);
 
-    assert_eq!(out_whao, "aGVsbG8gd29ybGQ=");
+    assert_eq!(out_whao.unwrap(), "aGVsbG8gd29ybGQ=");
 }
