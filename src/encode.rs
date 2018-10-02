@@ -21,7 +21,7 @@ const BITMASK: BitMask = BitMask {
 };
 
 const SENT: u8 = 255;
-const PAD: u8 = 64;
+const PAD: u8 = b'=';
 
 pub fn encode (s: &[u8]) -> Result<String, FromUtf8Error> {
     let len = s.len();
@@ -50,14 +50,12 @@ pub fn encode (s: &[u8]) -> Result<String, FromUtf8Error> {
             encoded.push((chunk[0] & BITMASK.le2 << 4) + 16);
             encoded.push(PAD);
             encoded.push(PAD);
-            break;
         } else {
             encoded.push(((chunk[0] & BITMASK.le2) << 4) + ((chunk[1] & BITMASK.be4) >> 4));
 
             if chunk[2] == &SENT {
                 encoded.push((chunk[1] & BITMASK.le4) << 2);
                 encoded.push(PAD);
-                break;
             } else {
                 encoded.push(((chunk[1] & BITMASK.le4) << 2) + ((chunk[2] & BITMASK.be2) >> 6));
                 encoded.push(chunk[2] & BITMASK.le6);
