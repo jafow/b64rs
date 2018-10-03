@@ -18,6 +18,6 @@ fn test_encode_multi_word() {
 
 #[test]
 fn test_decde_single_word() {
-    let d: &[u8] = b64rs::decode(b"Man");
-    assert_eq!(1, 0);
+    let d: &[u8] = b64rs::decode(b"TWFu");
+    assert_eq!(b"Man", d);
 }
