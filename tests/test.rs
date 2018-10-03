@@ -15,3 +15,9 @@ fn test_encode_multi_word() {
 
     assert_eq!(out_whao.unwrap(), "aGVsbG8gd29ybGQ=");
 }
+
+#[test]
+fn test_decde_single_word() {
+    let d: &[u8] = b64rs::decode(b"Man");
+    assert_eq!(1, 0);
+}
