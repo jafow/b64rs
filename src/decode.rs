@@ -21,7 +21,10 @@ const BITMASK: BitMask = BitMask {
 const SENT: u8 = 255;
 const PAD: u8 = 64;
 
-pub fn decode(s: &[u8]) -> Vec<u8>  {
+/// lookup each char in reverse table
+/// ie [b"T", b"W", b"F", b"u"] => [19, 21, 6, 41]
+/// then smoosh those ints into 3 bytes
+pub fn decode(s: &[u8]) -> &[u8] {
     let len = s.len();
     let mut output = Vec::new();
 
