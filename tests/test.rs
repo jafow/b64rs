@@ -15,3 +15,11 @@ fn test_encode_multi_word() {
 
     assert_eq!(out_whao.unwrap(), "aGVsbG8gd29ybGQ=");
 }
+
+#[test]
+fn test_decode_single_word() {
+    let man = b"TWFu";
+    let res = b64rs::decode(man);
+
+    assert_eq!(vec![8,2,3, 4, 1, 2, 3], res);
+}
