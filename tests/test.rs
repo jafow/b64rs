@@ -17,7 +17,9 @@ fn test_encode_multi_word() {
 }
 
 #[test]
-fn test_decde_single_word() {
-    let d: &[u8] = b64rs::decode(b"Man");
-    assert_eq!(1, 0);
+fn test_decode_single_word() {
+    let man = b"TWFu";
+    let res = b64rs::decode(man);
+
+    assert_eq!(vec![8,2,3, 4, 1, 2, 3], res);
 }
