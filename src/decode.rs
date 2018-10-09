@@ -13,12 +13,13 @@ const BITMASK: BitMask = BitMask {
 };
 
 
-pub fn decode(s: &[u8]) -> &[u8] {
+pub fn decode(s: &[u8]) -> Result<Vec<u8>, ()> {
     let mut output = Vec::new();
 
     for c in s.chunks(4) {
-        output.push((&c[0] << 2) + (&c[1] & BITMASK.le56 >> 4));
-        output.push(((&c[1] & BITMASK.be4) << 2) + ((&c[2] & BITMASK.le2) >> 2));
+        output.push(((&c[0] & 0x3f) << 2) + (&c[1] & BITMASK.le56 >> 4));
+        output.push(((&c[1] & BITMASK.le4) << 4) + ((&c[2] & BITMASK.be6) >> 2));
+        output.push(((&c[2] & BITMASK.le2) << 6) + (&c[3]));
     }
-    output
+    Ok(output)
 }
